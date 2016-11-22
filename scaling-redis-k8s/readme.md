@@ -2,4 +2,6 @@
 
 ## Notes
 
-Machine types: GCP n1-standard-4
+Machine types: GCP g1-small
+Number of machines: 12
+Number of pods: 12
