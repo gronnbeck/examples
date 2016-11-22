@@ -1,0 +1,19 @@
+{
+	"ImportPath": "github.com/gronnbeck/examples/scaling-redis-k8s",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v74",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codeship/go-retro",
+			"Rev": "ca7afd6235c27c25077bc2189e102d042f291f8c"
+		},
+		{
+			"ImportPath": "github.com/mediocregopher/radix.v2/pool",
+			"Rev": "94451b037e02236d550bdc2035d0a9851749369b"
+		},
+		{
+			"ImportPath": "github.com/mediocregopher/radix.v2/redis",
+			"Rev": "94451b037e02236d550bdc2035d0a9851749369b"
+		}
+	]
+}

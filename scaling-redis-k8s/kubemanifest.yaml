@@ -1,0 +1,55 @@
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: scalingredis-example
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: scalingredis-example-api
+      app: examples
+      tier: api
+  template:
+    metadata:
+      name: scalingredis-example-api
+      labels:
+        name: scalingredis-example-api
+        app: examples
+        tier: api
+    spec:
+      containers:
+      - name: scalingredis-api
+        imagePullPolicy: Always
+        image: gronnbeck/scalingredis:latest
+        ports:
+        - name: api
+          containerPort: 8080
+        env:
+          - name: REDIS_ADDR
+            valueFrom:
+              secretKeyRef:
+                name: scalingredis-example-secret
+                key: redis-addr
+          - name: REDIS_PASS
+            valueFrom:
+              secretKeyRef:
+                name: scalingredis-example-secret
+                key: redis-pass
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: scalingredis-example-api
+  labels:
+    app: examples
+spec:
+  selector:
+    name: scalingredis-example-api
+    app: examples
+    tier: api
+  ports:
+    - name: api
+      protocol: TCP
+      port: 8080
+  type: LoadBalancer
